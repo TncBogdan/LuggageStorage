@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 @Data
 public class Slot {
     private boolean isEmpty;
-    private LocalDateTime luggageSubmission = LocalDateTime.now();
-    private LocalDateTime takeLuggage = LocalDateTime.now();
+    private LocalDateTime luggageSubmission;
+    private LocalDateTime takeLuggage;
 
     public void showSlots() {
         for (int i = 1; i <= 20; i++) {

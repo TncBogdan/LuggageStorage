@@ -10,26 +10,19 @@ import java.util.Scanner;
 public class Storage {
     private Menu menu;
 
-    //persist slot in memory
-
     List<Slot> slotNumber = new ArrayList<>(Arrays.asList(new Slot[5]));
-    private final Slot slot = new Slot();
-    private final Scanner scanner = new Scanner(System.in);
+    private Slot slot = new Slot();
+    private Scanner scanner = new Scanner(System.in);
 
     public void start() {
         submissionLuggage();
     }
 
     public void submissionLuggage() {
+        Slot slot = new Slot();
         slot.showSlots();
         System.out.println("\n Choose a slot:");
         var chosenNumber = scanner.nextInt();
-
-        if (slotNumber.contains(chosenNumber)) {
-            System.out.println("Choose another slot.");
-            submissionLuggage();
-        }
-
         slot.getChosenSlot(chosenNumber);
         var codeGenerated = generateCode(chosenNumber);
         slot.setLuggageSubmission(LocalDateTime.now());
@@ -47,6 +40,7 @@ public class Storage {
     }
 
     public void payLuggage() {
+        Slot slot = new Slot();
         System.out.println("Scan your code: ");
         scanner.nextDouble();
         slot.setTakeLuggage(LocalDateTime.now());
@@ -60,6 +54,7 @@ public class Storage {
     }
 
     public void setPrice() {
+        Slot slot = new Slot();
         var time = slot.calculatePayTime();
         var price = 10;
         if (time <= 60) {

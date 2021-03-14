@@ -9,4 +9,9 @@ public class Validation {
 //        }
 //        return false;
 //    }
+
+//    if (slotNumber.contains(chosenNumber)) {
+//        System.out.println("Choose another slot.");
+//        submissionLuggage();
+//    }
 }
