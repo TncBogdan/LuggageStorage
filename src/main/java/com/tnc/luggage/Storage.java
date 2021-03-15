@@ -3,39 +3,46 @@ package com.tnc.luggage;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
-public class Storage {
+public class Storage{
     private Menu menu;
 
-    List<Slot> slotNumber = new ArrayList<>(Arrays.asList(new Slot[5]));
-    private Slot slot = new Slot();
+    ArrayList<Slot> slotNumber = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
 
     public void start() {
-        submissionLuggage();
+        for (int i = 1; i <= 5; i++) {
+            Slot slot = new Slot();
+            slot.showSlots();
+            System.out.println("\n Choose a slot:");
+            var chosenNumber = scanner.nextInt();
+            validateSlot(slot);
+            slot.setId(chosenNumber);
+            slot.setEmpty(true);
+            slot.setId(chosenNumber);
+            slot.getChosenSlot(chosenNumber);
+            var codeGenerated = generateCode(chosenNumber);
+            slot.setLuggageSubmission(LocalDateTime.now());
+            System.out.println("Your time is: " + " " + LocalTime.now());
+            System.out.println("Your code is: " + codeGenerated);
+            slotNumber.add(slot);
+            verifySlot();
+        }
     }
 
-    public void submissionLuggage() {
-        Slot slot = new Slot();
-        slot.showSlots();
-        System.out.println("\n Choose a slot:");
-        var chosenNumber = scanner.nextInt();
-        slot.getChosenSlot(chosenNumber);
-        var codeGenerated = generateCode(chosenNumber);
-        slot.setLuggageSubmission(LocalDateTime.now());
-        System.out.println("Your time is: " + " " + LocalTime.now());
-        System.out.println("Your code is: " + codeGenerated);
-        slotNumber.set(chosenNumber, slot);
-        slotNumber.add(slot);
-        verifySlot(chosenNumber);
+    public void validateSlot(Slot slot) {
+        for (Slot s : slotNumber){
+            if (!slot.isEmpty()) {
+                System.out.println("Chose another slot");
+            }
+                System.out.println(s);
+        }
     }
 
-    public void verifySlot(int number) {
+    public void verifySlot() {
         for (Slot s : slotNumber) {
-            System.out.println(number + " " + s);
+            System.out.println(s);
         }
     }
 
@@ -46,7 +53,7 @@ public class Storage {
         slot.setTakeLuggage(LocalDateTime.now());
         System.out.println("Your time is: " + LocalTime.now());
         slot.calculatePayTime();
-        slot.setEmpty(true);
+        slot.setEmpty(false);
         System.out.println("You have a total of " + slot.calculatePayTime() + " minutes.");
         setPrice();
         System.out.println("Thank you! ");

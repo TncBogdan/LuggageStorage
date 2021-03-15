@@ -18,7 +18,7 @@ public class Menu {
                 storage.payLuggage();
                 break;
             case 2:
-                storage.submissionLuggage();
+                storage.start();
                 break;
         }
     }
