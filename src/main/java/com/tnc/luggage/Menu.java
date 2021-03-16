@@ -12,7 +12,7 @@ public class Menu {
         while (option != 0) {
             displayOptions();
             option = readOption();
-            executePayment(option);
+            executeOption(option);
         }
     }
 
@@ -23,7 +23,7 @@ public class Menu {
 
     private Integer readOption() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Your option is: ");
+        System.out.print("Select an option: ");
         try {
             return scanner.nextInt();
         } catch (InputMismatchException e) {
@@ -31,7 +31,7 @@ public class Menu {
         }
     }
 
-    public void executePayment(Integer option) {
+    public void executeOption(Integer option) {
         switch (option) {
             case 1:
                 storage.payLuggage();
