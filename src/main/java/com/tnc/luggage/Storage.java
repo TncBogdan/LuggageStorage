@@ -5,14 +5,21 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Storage{
-    private Menu menu;
-
-    ArrayList<Slot> slotNumber = new ArrayList<>();
+public class Storage {
     private Scanner scanner = new Scanner(System.in);
+
+    private Menu menu;
+    ArrayList<Slot> slotNumber = new ArrayList<>();
 
     public void start() {
         for (int i = 1; i <= 5; i++) {
+            Menu menu = new Menu();
+            menu.displayMenu();
+        }
+    }
+
+    public void initiateLuggage() {
+        for (int i = 1; i <= 5; i++) {  //////////test
             Slot slot = new Slot();
             slot.showSlots();
             System.out.println("\n Choose a slot:");
@@ -32,11 +39,11 @@ public class Storage{
     }
 
     public void validateSlot(Slot slot) {
-        for (Slot s : slotNumber){
+        for (Slot s : slotNumber) {
             if (!slot.isEmpty()) {
                 System.out.println("Chose another slot");
             }
-                System.out.println(s);
+            System.out.println(s);
         }
     }
 

@@ -4,10 +4,9 @@ import lombok.Data;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.Comparator;
 
 @Data
-public class Slot implements Comparator<Slot> {
+public class Slot {
     int id = 1;
     private boolean isEmpty;
     private LocalDateTime luggageSubmission;
@@ -25,11 +24,5 @@ public class Slot implements Comparator<Slot> {
 
     public long calculatePayTime() {
         return Duration.between(this.getLuggageSubmission(), this.getTakeLuggage()).toMinutes();
-    }
-
-
-    @Override
-    public int compare(Slot o1, Slot o2) {
-        return 0;
     }
 }

@@ -1,10 +1,10 @@
 package com.tnc.luggage;
 
-public class Main1 {
+public class App {
 
     public static void main(String[] args) {
-        Menu menu = new Menu();
-        menu.displayMenu();
+//        Menu menu = new Menu();
+//        menu.displayMenu();
 
         Storage storage = new Storage();
         storage.start();
