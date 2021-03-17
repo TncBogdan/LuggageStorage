@@ -1,1 +1,5 @@
-com\tnc\luggageStorageArray\Storage.class
+com\tnc\luggage\Validation.class
+com\tnc\luggage\Menu.class
+com\tnc\luggage\Storage.class
+com\tnc\luggage\App.class
+com\tnc\luggage\Slot.class
