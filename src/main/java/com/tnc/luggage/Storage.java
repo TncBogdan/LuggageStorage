@@ -3,12 +3,14 @@ package com.tnc.luggage;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
     private Scanner scanner = new Scanner(System.in);
 
-    ArrayList<Slot> slotNumber = new ArrayList<>();
+    List<Slot> slotNumber = new ArrayList<>();
 
     public void start() {
         Menu menu = new Menu();
@@ -16,13 +18,13 @@ public class Storage {
     }
 
     public synchronized void initiateLuggage() {
-        if (slotNumber.size() <= 10) {
+        if (slotNumber.size() <= 3) {
             Slot slot = new Slot();
             slot.showSlots();
             System.out.println("\n Choose a slot:");
             var chosenNumber = scanner.nextInt();
+            getOccupiedBox(chosenNumber, slot);
             slot.setId(chosenNumber);
-            getOccupiedBox(slot);
 
             slot.setEmpty(true);
             slot.setLuggageSubmission(LocalDateTime.now());
@@ -35,6 +37,11 @@ public class Storage {
         } else {
             System.out.println("The luggage are full. ");
         }
+        try {
+        initiateLuggage();
+        }catch (StackOverflowError e){
+            System.out.println("FULL");
+        }
     }
 
 
@@ -44,12 +51,17 @@ public class Storage {
         }
     }
 
-    public void getOccupiedBox(Slot slot) {
+    public void getOccupiedBox(Integer number, Slot slot) {
+        try
+        {
         for (Slot s : slotNumber) {
-            if (s.getId() == (slot.getId())) {
+            if (s.getId() == (number.byteValue())) {
                 System.out.println("Choose another slot.");
                 initiateLuggage();
             }
+        }
+        }catch (ConcurrentModificationException e){
+            System.out.println("BUG");
         }
     }
 
