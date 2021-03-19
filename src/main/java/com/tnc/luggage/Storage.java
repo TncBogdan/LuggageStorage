@@ -34,13 +34,13 @@ public class Storage {
             var codeGenerated = generateCode(chosenNumber);
 //            System.out.println("Your time is: " + " " + LocalTime.now());
 //            System.out.println("Your code is: " + codeGenerated);
+            try {
+                initiateLuggage();
+            } catch (StackOverflowError e) {
+                System.out.println("FULL");
+            }
         } else {
             System.out.println("The luggage are full. ");
-        }
-        try {
-        initiateLuggage();
-        }catch (StackOverflowError e){
-            System.out.println("FULL");
         }
     }
 
