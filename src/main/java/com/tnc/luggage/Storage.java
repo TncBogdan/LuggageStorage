@@ -1,5 +1,7 @@
 package com.tnc.luggage;
 
+import lombok.Data;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -7,9 +9,10 @@ import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.Scanner;
 
+@Data
 public class Storage {
     private Scanner scanner = new Scanner(System.in);
-
+    private boolean isOccupied
     List<Slot> slotNumber = new ArrayList<>();
 
     public void start() {
@@ -38,8 +41,8 @@ public class Storage {
             System.out.println("The luggage are full. ");
         }
         try {
-        initiateLuggage();
-        }catch (StackOverflowError e){
+            initiateLuggage();
+        } catch (StackOverflowError e) {
             System.out.println("FULL");
         }
     }
@@ -52,15 +55,14 @@ public class Storage {
     }
 
     public void getOccupiedBox(Integer number, Slot slot) {
-        try
-        {
-        for (Slot s : slotNumber) {
-            if (s.getId() == (number.byteValue())) {
-                System.out.println("Choose another slot.");
-                initiateLuggage();
+        try {
+            for (Slot s : slotNumber) {
+                if (s.getId() == (number.byteValue())) {
+                    System.out.println("Choose another slot.");
+                    initiateLuggage();
+                }
             }
-        }
-        }catch (ConcurrentModificationException e){
+        } catch (ConcurrentModificationException e) {
             System.out.println("BUG");
         }
     }
