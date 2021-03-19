@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Menu {
 
-    Storage storage = new Storage();
+    StorageService storageService =  new StorageService();
 
     public void displayMenu() {
         Integer option = Integer.MAX_VALUE;
@@ -34,10 +34,10 @@ public class Menu {
     public void executeOption(Integer option) {
         switch (option) {
             case 1:
-                storage.payLuggage();
+                storageService.payLuggage();
                 break;
             case 2:
-                storage.initiateLuggage();
+                storageService.initiateLuggage();
                 break;
         }
     }
