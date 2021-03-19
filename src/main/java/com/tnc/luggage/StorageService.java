@@ -57,15 +57,17 @@ public class StorageService {
         }
     }
 
+////////////////////////////// this method must expose only the free boxes
     public void showFreeBoxes() {
-        if (!slotArrayList.contains(slot)) {
-            for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 5; i++) {
+            if (!slotArrayList.contains(slot.getLuggageSubmission())) {
                 System.out.print(" Box " + i);
+            } else {
+                System.out.println(" Full ");
             }
         }
-            System.out.println(" Full ");
     }
-
+////////////////////////////////
 
     public void payLuggage() {
         Slot slot = new Slot();
