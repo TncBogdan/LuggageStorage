@@ -19,9 +19,8 @@ public class StorageService {
         Menu menu = new Menu();
         menu.displayMenu();
     }
+
     public void initiateLuggage() {
-/////////////// add arrayList<Boxes> and replace this slotArrayList
-//        boolean isOccupied and id
         if (slotArrayList.size() != 0) {
             Slot slot = new Slot();
             showFreeBoxes();
@@ -30,8 +29,8 @@ public class StorageService {
             addSlot(setAndSaveSlotAndStorageBool(slot, chosenNumber));
 
             var codeGenerated = generateCode(chosenNumber);
-//            System.out.println("Your time is: " + " " + LocalTime.now());
-//            System.out.println("Your code is: " + codeGenerated);
+            System.out.println("Your time is: " + " " + LocalTime.now());
+            System.out.println("Your code is: " + codeGenerated);
         } else {
             System.out.println("The luggage are full. ");
         }
@@ -59,7 +58,6 @@ public class StorageService {
         }
     }
 
-    ////////////////////////////// this method must expose only the free boxes
     public void showFreeBoxes() {
         for (int i = slotArrayList.size(); i < 5; i++) {
 //        for (int i = 1; i <= slotArrayList.size();  i++) {
@@ -70,7 +68,6 @@ public class StorageService {
             }
         }
     }
-////////////////////////////////
 
     public void payLuggage() {
         Slot slot = new Slot();
