@@ -19,9 +19,10 @@ public class StorageService {
         Menu menu = new Menu();
         menu.displayMenu();
     }
-
     public void initiateLuggage() {
-        if (slotArrayList.size() <= 3) {
+/////////////// add arrayList<Boxes> and replace this slotArrayList
+//        boolean isOccupied and id
+        if (slotArrayList.size() != 0) {
             Slot slot = new Slot();
             showFreeBoxes();
             System.out.println("\n Choose a box:");
@@ -46,6 +47,7 @@ public class StorageService {
     public Slot addSlot(Slot slot) {
         if (slot.isEmpty()) {
             slotArrayList.add(slot);
+            slotArrayList.set(slot.getId(), slot);
             printSlot();
         }
         return slot;
@@ -57,13 +59,14 @@ public class StorageService {
         }
     }
 
-////////////////////////////// this method must expose only the free boxes
+    ////////////////////////////// this method must expose only the free boxes
     public void showFreeBoxes() {
-        for (int i = 0; i < 5; i++) {
-            if (!slotArrayList.contains(slot.getLuggageSubmission())) {
+        for (int i = slotArrayList.size(); i < 5; i++) {
+//        for (int i = 1; i <= slotArrayList.size();  i++) {
+            slotArrayList.add(i, slot);
+//            slotArrayList.set(i, slot);
+            if (slotArrayList.contains(slot)) {
                 System.out.print(" Box " + i);
-            } else {
-                System.out.println(" Full ");
             }
         }
     }
