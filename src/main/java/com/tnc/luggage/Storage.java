@@ -32,8 +32,8 @@ public class Storage {
             printSlot();
 
             var codeGenerated = generateCode(chosenNumber);
-//            System.out.println("Your time is: " + " " + LocalTime.now());
-//            System.out.println("Your code is: " + codeGenerated);
+            System.out.println("Your time is: " + " " + LocalTime.now());
+            System.out.println("Your code is: " + codeGenerated);
             try {
                 initiateLuggage();
             } catch (StackOverflowError e) {
@@ -64,11 +64,6 @@ public class Storage {
             System.out.println("BUG");
         }
     }
-
-
-//    persons.stream()
-//            .filter( p-> p.getSurname().equals(“Mellor”) )
-//            .collect( toList() );
 
     public void payLuggage() {
         Slot slot = new Slot();
