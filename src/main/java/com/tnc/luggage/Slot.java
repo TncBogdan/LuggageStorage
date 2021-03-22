@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 @Data
 public class Slot {
     int id;
-    private boolean isEmpty;
     private LocalDateTime luggageSubmission;
     private LocalDateTime getLuggage;
 
