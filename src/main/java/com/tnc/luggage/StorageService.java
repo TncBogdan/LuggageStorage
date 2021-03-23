@@ -23,20 +23,14 @@ public class StorageService {
     }
 
     public void initiateLuggage() {
-        if (!(slotArrayList == null)) {
-
             showBoxes();
             Slot slot = new Slot();
             System.out.println("\n Choose a box:");
             var chosenNumber = scanner.nextInt();
             addSlot(setAndSaveSlotAndStorageBool(slot, chosenNumber), box);
-
-//            var codeGenerated = generateCode(chosenNumber);
-//            System.out.println("Your time is: " + " " + LocalTime.now());
-//            System.out.println("Your code is: " + codeGenerated);
-        } else {
-            System.out.println("The luggage are full. ");
-        }
+            var codeGenerated = generateCode(chosenNumber);
+            System.out.println("Your time is: " + " " + LocalTime.now());
+            System.out.println("Your code is: " + codeGenerated);
     }
 
     public void addSlot(Slot slot, Box box) {
@@ -52,7 +46,6 @@ public class StorageService {
     public Slot setAndSaveSlotAndStorageBool(Slot slot, Integer chosenNumber) {
         var comp = Comparator.comparing(Slot::getId);
 
-//        if (slot.getId() != chosenNumber) {
         if (!comp.equals(chosenNumber)) {
             slot.setId(chosenNumber);
             slot.setLuggageSubmission(LocalDateTime.now());
@@ -68,27 +61,17 @@ public class StorageService {
             System.out.println(s);
         }
     }
-///////////////// verify boxId =! null
+
     public void showBoxes() {
         boxList = boxList.stream().limit(5).collect(Collectors.toList());
         for (Box b : boxList) {
-            if (box.getId() = null) {
-                System.out.print(" Box " + box.getId());
+                if (b == null) {
+                System.out.print(" Box ");
             } else {
-                System.out.print("Null");
+                System.out.print("X");
             }
         }
     }
-
-//    public void showBoxes(Slot slot) {
-//        for (int i = slotArrayList.size(); i < 5; i++) {
-//            if (slotArrayList.size()< 5) {
-//                slotArrayList.add(slot);
-//            }else {
-//                System.out.println("Luggage is full");
-//            }
-//        }
-//    }
 
     public void payLuggage() {
         Slot slot = new Slot();
