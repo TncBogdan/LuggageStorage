@@ -17,11 +17,6 @@ public class StorageService {
     private List<Slot> slotArrayList = new ArrayList<>(Collections.nCopies(5, null));
     private List<Box> boxList = new ArrayList<>(Collections.nCopies(5, null));
 
-    public void start() {
-        Menu menu = new Menu();
-        menu.displayMenu();
-    }
-
     public Slot initiateLuggage() {
         showBoxes();
         Slot slot = new Slot();
