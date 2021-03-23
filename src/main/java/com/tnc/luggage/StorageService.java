@@ -22,15 +22,17 @@ public class StorageService {
         menu.displayMenu();
     }
 
-    public void initiateLuggage() {
-            showBoxes();
-            Slot slot = new Slot();
-            System.out.println("\n Choose a box:");
-            var chosenNumber = scanner.nextInt();
-            addSlot(setAndSaveSlotAndStorageBool(slot, chosenNumber), box);
-            var codeGenerated = generateCode(chosenNumber);
-            System.out.println("Your time is: " + " " + LocalTime.now());
-            System.out.println("Your code is: " + codeGenerated);
+    public Slot initiateLuggage() {
+        showBoxes();
+        Slot slot = new Slot();
+        System.out.println("\n Choose a box:");
+        var chosenNumber = scanner.nextInt();
+        addSlot(setAndSaveSlotAndStorageBool(slot, chosenNumber), box);
+        var codeGenerated = generateCode(chosenNumber);
+        slot.setCode(codeGenerated);
+        System.out.println("Your time is: " + " " + LocalTime.now());
+        System.out.println("Your code is: " + codeGenerated);
+        return slot;
     }
 
     public void addSlot(Slot slot, Box box) {
@@ -65,7 +67,7 @@ public class StorageService {
     public void showBoxes() {
         boxList = boxList.stream().limit(5).collect(Collectors.toList());
         for (Box b : boxList) {
-                if (b == null) {
+            if (b == null) {
                 System.out.print(" Box ");
             } else {
                 System.out.print("X");
@@ -74,13 +76,22 @@ public class StorageService {
     }
 
     public void payLuggage() {
-        Slot slot = new Slot();
+        var slot = new Slot();
+        var instantNow = LocalDateTime.now();
+
         System.out.println("Scan your code: ");
-        scanner.nextDouble();
-        slot.setGetLuggage(LocalDateTime.now());
-        System.out.println("Your time is: " + LocalTime.now());
+        var slotCode = scanner.nextDouble();
+
+        ////must get the slot id
+
+        slot.setGetLuggage(instantNow);
+        System.out.println("Your time is: " + instantNow);
+
         calculatePayTime();
-//        box.isOccupied = false;
+
+        ///must get the box id
+        box.setOccupied(false);
+
         System.out.println("You have a total of " + calculatePayTime() + " minutes.");
         setPrice();
         System.out.println("Thank you! ");
