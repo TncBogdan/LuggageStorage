@@ -16,11 +16,6 @@ public class Menu {
         }
     }
 
-    public void displayOptions() {
-        System.out.println("1 - Press 1 for pay.");
-        System.out.println("2 - Press 2 for continue.");
-    }
-
     private Integer readOption() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Select an option: ");
@@ -29,6 +24,11 @@ public class Menu {
         } catch (InputMismatchException e) {
             return -1;
         }
+    }
+
+    public void displayOptions() {
+        System.out.println("1 - Press 1 for pay.");
+        System.out.println("2 - Press 2 for continue.");
     }
 
     public void executeOption(Integer option) {

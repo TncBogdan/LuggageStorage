@@ -71,40 +71,42 @@ public class StorageService {
     }
 
     public void payLuggage() {
-        var slot = new Slot();
         var instantNow = LocalDateTime.now();
-
         System.out.println("Scan your code: ");
         var slotCode = scanner.nextDouble();
-
-        ////must get the slot id
-
-        slot.setGetLuggage(instantNow);
         System.out.println("Your time is: " + instantNow);
 
-        calculatePayTime();
+//        System.out.println("You have to pay " + calculatePayTime(getSlotId(slotCode, instantNow)) + " minutes.");
+        setPrice(calculatePayTime(getSlotId(slotCode, instantNow)));
 
-        ///must get the box id
         box.setOccupied(false);
 
-        System.out.println("You have a total of " + calculatePayTime() + " minutes.");
-        setPrice();
         System.out.println("Thank you! ");
         System.out.println(slot.toString());
     }
 
-    public void setPrice() {
-        Slot slot = new Slot();
-        var time = calculatePayTime();
+    public Slot getSlotId(double slotCode, LocalDateTime instantNow) {
+        Slot s1 = new Slot();
+        for (Slot s : slotArrayList) {
+            if (s != null && s.getCode() == slotCode) {
+                s.setGetLuggage(instantNow);
+                return s;
+            }
+            System.out.println(s);
+        }
+        return s1;
+    }
+
+    public void setPrice(long calc) {
         var price = 10;
-        if (time <= 60) {
-            System.out.println(price);
-        } else if (time <= 120) {
-            System.out.println(price += 5);
-        } else if (time <= 180) {
-            System.out.println(price += 10);
-        } else if (time <= 240) {
-            System.out.println(price += 15);
+        if (calc <= 60) {
+            System.out.println(price + " lei");
+        } else if (calc <= 120) {
+            System.out.println((price += 5) + " lei");
+        } else if (calc <= 180) {
+            System.out.println((price += 10) + " lei");
+        } else if (calc <= 240) {
+            System.out.println((price += 15) + " lei");
         } else {
             System.out.println("50 lei");
         }
@@ -114,7 +116,9 @@ public class StorageService {
         return number + (Math.floor(Math.random() * 9_000_000) + 1_000_000);
     }
 
-    public long calculatePayTime() {
-        return Duration.between(slot.getLuggageSubmission(), slot.getGetLuggage()).toMinutes();
+
+    public long calculatePayTime(Slot slot) {
+        return Duration.between(slot.getLuggageSubmission(), slot.getGetLuggage()).toSeconds();
     }
+
 }
