@@ -65,7 +65,7 @@ public class StorageService {
             if (b == null) {
                 System.out.print(" Box ");
             } else {
-                System.out.print("X");
+                System.out.print(" X ");
             }
         }
     }
@@ -75,14 +75,19 @@ public class StorageService {
         System.out.println("Scan your code: ");
         var slotCode = scanner.nextDouble();
         System.out.println("Your time is: " + instantNow);
-
-//        System.out.println("You have to pay " + calculatePayTime(getSlotId(slotCode, instantNow)) + " minutes.");
-        setPrice(calculatePayTime(getSlotId(slotCode, instantNow)));
-
+        var slot = getSlotId(slotCode, instantNow);
+        System.out.println("You have " + setTotalPay(slot) + " minutes.");
+        setPrice(setTotalPay(slot));
         box.setOccupied(false);
-
         System.out.println("Thank you! ");
         System.out.println(slot.toString());
+        setNullSlot(slot, slotCode);
+    }
+
+    public void setNullSlot(Slot slot, double code) {
+            if (slotArrayList != null && slotArrayList.indexOf(slot) == slot.getId()) {
+                slotArrayList.remove(slot);
+            }
     }
 
     public Slot getSlotId(double slotCode, LocalDateTime instantNow) {
@@ -92,7 +97,6 @@ public class StorageService {
                 s.setGetLuggage(instantNow);
                 return s;
             }
-            System.out.println(s);
         }
         return s1;
     }
@@ -116,9 +120,12 @@ public class StorageService {
         return number + (Math.floor(Math.random() * 9_000_000) + 1_000_000);
     }
 
-
     public long calculatePayTime(Slot slot) {
         return Duration.between(slot.getLuggageSubmission(), slot.getGetLuggage()).toSeconds();
     }
 
+    public long setTotalPay(Slot slot) {
+        slot.setPay(calculatePayTime(slot));
+        return slot.getPay();
+    }
 }
