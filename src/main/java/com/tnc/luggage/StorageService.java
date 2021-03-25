@@ -18,9 +18,9 @@ public class StorageService {
     private List<Box> boxList = new ArrayList<>(Collections.nCopies(5, null));
 
     public Slot initiateLuggage() {
-        showBoxes();
         Slot slot = new Slot();
         System.out.println("\n Choose a box:");
+        showBoxes();
         var chosenNumber = scanner.nextInt();
         addSlot(setAndSaveSlotAndStorageBool(slot, chosenNumber), box);
         var codeGenerated = generateCode(chosenNumber);
@@ -78,17 +78,28 @@ public class StorageService {
         var slot = getSlotId(slotCode, instantNow);
         System.out.println("You have " + setTotalPay(slot) + " minutes.");
         setPrice(setTotalPay(slot));
-        box.setOccupied(false);
         System.out.println("Thank you! ");
         System.out.println(slot.toString());
-        setNullSlot(slot, slotCode);
+        setNullSlot(slot);
+        setNullBox(slot);
+//        box.setOccupied(false);
     }
 
-    public void setNullSlot(Slot slot, double code) {
-            if (slotArrayList != null && slotArrayList.indexOf(slot) == slot.getId()) {
-                slotArrayList.remove(slot);
-            }
+    public void setNullSlot(Slot slot) {
+        if (slotArrayList != null && slotArrayList.indexOf(slot) == slot.getId()) {
+            slotArrayList.remove(slot);
+        }
     }
+
+///// add slot to boxList
+    public void setNullBox(Slot slot) {
+        if (boxList != null && boxList.indexOf(box) == slot.getId()) {
+//            boxList.remove(slot);
+//            boxList.add(null);
+            boxList.set(slot.getId(), null);
+        }
+    }
+/////////////////
 
     public Slot getSlotId(double slotCode, LocalDateTime instantNow) {
         Slot s1 = new Slot();
