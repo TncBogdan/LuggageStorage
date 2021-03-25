@@ -1,11 +1,11 @@
-package com.tnc.luggage;
+package com.tnc.luggage.implementation;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
 
-    StorageService storageService =  new StorageService();
+    LuggageImpl luggage = new LuggageImpl();
 
     public void displayMenu() {
         Integer option = Integer.MAX_VALUE;
@@ -34,10 +34,10 @@ public class Menu {
     public void executeOption(Integer option) {
         switch (option) {
             case 1:
-                storageService.payLuggage();
+                luggage.payLuggage();
                 break;
             case 2:
-                storageService.initiateLuggage();
+                luggage.initializeLuggage();
                 break;
         }
     }

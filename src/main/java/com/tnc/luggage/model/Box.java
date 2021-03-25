@@ -1,4 +1,4 @@
-package com.tnc.luggage;
+package com.tnc.luggage.model;
 
 import lombok.Data;
 
