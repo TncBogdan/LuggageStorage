@@ -1,7 +1,6 @@
 package com.tnc.luggage.implementation;
 
-import com.tnc.luggage.interfaces.AddObject;
-import com.tnc.luggage.interfaces.SetObject;
+import com.tnc.luggage.interfaces.AddAndSetObject;
 import com.tnc.luggage.model.Box;
 import com.tnc.luggage.model.Slot;
 
@@ -13,7 +12,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SlotService implements AddObject, SetObject {
+public class SlotService implements AddAndSetObject {
     private final Slot slot = new Slot();
     private List<Slot> slotArrayList = new ArrayList<>(Collections.nCopies(10, null));
 
@@ -25,9 +24,9 @@ public class SlotService implements AddObject, SetObject {
     }
 
     public Slot setAndSaveSlotAndStorageBoolean(Slot slot, Integer chosenNumber) {
-        var comp = Comparator.comparing(Slot::getId);
-        if (!comp.equals(chosenNumber)) {
-            slot.setId(chosenNumber -1);
+        var compareSlotById = Comparator.comparing(Slot::getId);
+        if (!compareSlotById.equals(chosenNumber)) {
+            slot.setId(chosenNumber - 1);
             slot.setLuggageSubmission(LocalDateTime.now());
         } else {
             return null;
@@ -65,7 +64,27 @@ public class SlotService implements AddObject, SetObject {
     }
 
     public long setTotalPay(Slot slot) {
-        slot.setPay(calculatePayTime(slot));
+        slot.setPay(setPrice(calculatePayTime(slot)));
         return slot.getPay();
+    }
+
+    public long setPrice(long calc) {
+        var price = 10;
+        if (calc <= 60) {
+            System.out.println(price + " lei");
+        } else if (calc <= 120) {
+            System.out.println((price += 5) + " lei");
+        } else if (calc <= 180) {
+            System.out.println((price += 10) + " lei");
+        } else if (calc <= 240) {
+            System.out.println((price += 15) + " lei");
+        } else {
+            System.out.println("50 lei");
+        }
+        return price;
+    }
+
+    public double generateCode(double number) {
+        return number + (Math.floor(Math.random() * 9_000_000) + 1_000_000);
     }
 }

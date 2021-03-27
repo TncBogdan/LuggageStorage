@@ -1,7 +1,6 @@
 package com.tnc.luggage.implementation;
 
-import com.tnc.luggage.interfaces.AddObject;
-import com.tnc.luggage.interfaces.SetObject;
+import com.tnc.luggage.interfaces.AddAndSetObject;
 import com.tnc.luggage.model.Box;
 import com.tnc.luggage.model.Slot;
 
@@ -10,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class BoxService implements AddObject, SetObject {
+public class BoxService implements AddAndSetObject {
     Box box = new Box();
     List<Box> boxList = new ArrayList<>(Collections.nCopies(10, null));
 
