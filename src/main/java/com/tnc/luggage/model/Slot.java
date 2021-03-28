@@ -1,4 +1,4 @@
-package com.tnc.luggage;
+package com.tnc.luggage.model;
 
 import lombok.Data;
 
@@ -6,7 +6,9 @@ import java.time.LocalDateTime;
 
 @Data
 public class Slot {
-    int id;
+    private int id;
+    private long pay;
+    private double code;
     private LocalDateTime luggageSubmission;
     private LocalDateTime getLuggage;
 

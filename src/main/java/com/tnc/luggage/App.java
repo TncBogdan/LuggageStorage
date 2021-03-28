@@ -1,10 +1,11 @@
 package com.tnc.luggage;
 
+import com.tnc.luggage.implementation.Menu;
+
 public class App {
 
     public static void main(String[] args) {
-        StorageService storage = new StorageService();
-        storage.start();
-
+        Menu menu = new Menu();
+        menu.displayMenu();
     }
 }
